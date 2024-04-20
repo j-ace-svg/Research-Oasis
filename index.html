@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Research Oasis</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="header">
+    <h1>Research Oasis: the best place to find research papers</h1>
+    <form id="search-form" onsubmit="loadPapers(); return false;">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search-input">
+        
+        <br>
+        <label for="field-select">Field</label>
+        <select name="field" id="field-select">
+        <option value="All">All</option>
+        <option value="cs">Computer Science</option>
+        <option value="math">Math</option>
+        <option value="physics">Physics</option>
+        <option value="hep-ph">High Energy Physics - Phenomenology</option>
+        <option value="cond-mat">Condensed Matter</option>
+        <option value="gr-qc">General Relativity and Quantum Cosmology</option>
+        <option value="astro-ph">Astrophysics</option>
+        <option value="hep-th">High Energy Physics - Theory</option>
+        <option value="hep-ex">High Energy Physics - Experiment</option>
+        <option value="nlin">Nonlinear Sciences</option>
+        <option value="q-bio">Quantitative Biology</option>
+        <option value="quant-ph">Quantitative Physics</option>
+        <option value="hep-lat">High Energy Physics - Lattice</option>
+        <option value="nucl-th">Nuclear Theory</option>
+        <option value="math-ph">Mathematical Physics</option>
+        <option value="nucl-ex">Nuclear Experiment</option>
+        <option value="Other">Other</option>
+        </select>
+        
+        <br>
+        <input type="submit" name="submit" id="submit-button">
+    </form>
+  </div>
+    
+    
+  <div id="results"></div>
+  
+<div class ="container"></div>
+    
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -64,6 +64,7 @@ async function filterPapersByCategory(filterCategory) {
 
 function filterPapersByRegex(papers, pattern) {
     let matchingPapers = [];
+    let matchingPapersRanked = [];
     let patternList = pattern.split(" ");
     let regexList = [];
     patternList.forEach((pattern) => {
@@ -78,10 +79,22 @@ function filterPapersByRegex(papers, pattern) {
     })*/
     papers.forEach((paper) => {
         regexList.forEach((regex) => {
-            if ((regex.test(paper.title) || regex.test(paper.abstract) || regex.test(paper.categories)) && !matchingPapers.includes(paper)) {
-                matchingPapers.push(paper);
+            if ((regex.test(paper.title) || regex.test(paper.abstract) || regex.test(paper.categories))) {
+                if (!matchingPapers.includes(paper)) {
+                    matchingPapers.push(paper);
+                    matchingPapersRanked.push([paper, 1]);
+                } else {
+                    matchingPapersRanked[matchingPapers.length - 1][1]++;
+                }
             }
         })
+    })
+    matchingPapersRanked.sort((a, b) => {
+        return a[1] - b[1];
+    })
+    matchingPapers = [];
+    matchingPapersRanked.forEach((paper) => {
+        matchingPapers.push(paper[0]);
     })
     return matchingPapers;
 }
@@ -106,6 +119,11 @@ async function loadPapers() {
         titleLink.href = "https://arxiv.org/abs/" + paper.id;
         titleHeading.appendChild(titleLink);
         container.appendChild(titleHeading);
+        const authorsHeading = document.createElement("h3");
+        const authorsItalics = document.createElement("i");
+        authorsItalics.textContent = "Authors: " + paper.authors;
+        authorsHeading.appendChild(authorsItalics);
+        container.appendChild(authorsHeading);
         const description = document.createElement("p");
         description.textContent = "Abstract: " + paper.abstract;
         container.appendChild(description);
